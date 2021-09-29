@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block style %}
+{% endblock %}
+{% block content %}
+    {% if request.session.reg %}
+        <div class="container">
+            {% for message in messages %}
+                <p style="font-size: large; text-align:center; color:green;">{{message}}</p>
+            {% endfor %}
+            <form style="margin-top: 3%;" action="/addproduct" enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button class="btn btn-info">Submit</button>
+            </form>
+        </div>
+        {{business.firmname}}
+    {% else %}   
+        <p style="text-align:center; font-size:xx-large; margin-top:10%;">You have to be loggedin for adding a product and have to be a verified business</p>
+    {% endif %}
+{% endblock %}

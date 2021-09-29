@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block style %}
+<style>
+    @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)
+        {
+
+      
+
+}
+</style>
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <p style="text-align: center; font-size:large; margin-top:2%;">We are verifiying your product check status --> </p>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr class="text-center">
+                        <th>Firmname</th>
+                        <th>GSTIN</th>
+                        <th>Product</th>
+                        <th>Product Name</th>
+                        <th>status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                        {% for product in product %}
+                        <tr class="text-center">
+                            <td>{{product.firmname}}</td>
+                            <td>{{product.gstin}}</td>
+                            <td><img style="width: 50px; height:50px;" src="{{product.image1.url}}" alt="image"></td>
+                            <td>{{product.name}}</td>
+                            <td>{{product.status}}</td>
+                        </tr>
+                        {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

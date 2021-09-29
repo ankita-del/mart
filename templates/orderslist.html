@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+   <div class="container">
+    <div class="row text-center">
+        <div style="border-right: 2px solid black;" class="col-6">
+             <div class="row">
+                 {% for userproduct in userproduct %}
+                   <div id="element" style="border: 1px solid grey;" class="col-lg-3 col-md-4 col-sm-6 col-12  mx-2 my-2">
+                    <p style="background-color: green; color:white;">Username : {{userproduct.user}}</p>
+                     <p style="background-color: green; color:white;">First Name : {{userproduct.user.first_name}}</p>
+                     <p style="background-color: yellow;">Quantity : {{userproduct.quantity}}</p>
+                     <p style="background-color: blue; color:white;">Product Name : {{userproduct.product.name}}</p>
+                     <p>Paid <b>{{userproduct.totalprice}} rs</b></p>
+                     <p>{{userproduct.date}}</p>
+                   
+                    
+                   </div>
+                 {% endfor %}
+             </div>
+             
+        </div>
+        <div  class="col-6">
+            <p style=" color:rebeccapurple; font-size:xx-large;">ADDRESSES</p>
+            <div class="row text-center">
+                    {% for register in register %}
+                       <div style="border: 1px solid grey;" class="col-lg-6 col-md-6 col-sm-6 col-12 my-2">
+                           <p style="background-color: green; color:white;">Username : {{register.user}}</p>
+                           <p>Address : {{register.address}}</p>
+                           <p>Mobile : {{register.mobile}}</p>
+                           <p>State : {{register.state}}</p>
+                           <p>City : {{register.city}}</p>
+                           <p>Pincode : {{register.pincode}}</p>
+                       </div>
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
+   </div>
+    
+{% endblock %}
+{% block script %}
+
+{% endblock %}

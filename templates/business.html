@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block style %}
+{% endblock %}
+{% block content %}
+    <p style="text-align: center; font-size:large;">Have a business account <a href="/businesslogin">Login</a> </p>
+    <p style="text-align: center; font-size:xx-large;">Register as a Business</p>
+    <div class="container border">
+        {% for message in messages %}
+            <p style="text-align: center; font-size:xx-large;">{{message}}</p>
+        {% endfor %}
+        <form action="/business" enctype="multipart/form-data" style="padding: 10px;" method="POST" class="UniForm">
+            {% csrf_token %}
+            {{form|crispy}}
+            <button class="btn btn-info" type="submit">Submit</button>    
+       </form>
+    </div>
+{% endblock %}

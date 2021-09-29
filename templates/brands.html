@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block style %}
+{% endblock %}
+{% block title %} Brands {% endblock %}
+{% block content %}
+<h4 style="text-align: center; margin-top:3%; font-size:large;">All Brands</h4>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="row text-center">
+                {% for brand in brands %}
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 my-3">
+                        <img style="width: 150px; height:70px;" src="{{brand.image.url}}" alt="brand">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

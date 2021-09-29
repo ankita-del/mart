@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block style %}
+{% load custom_filters %}
+<style>
+    .productbody{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .filters{
+        display: none;
+    }
+    #advdropdown{
+        display: none;
+    }
+    @media screen and (max-width:795px){
+        .filters{
+            display: block;
+        }
+        #sorting{
+            display: none;
+        }
+        #advdropdown{
+            display: block;
+            float: left;
+        }
+    }
+</style>
+{% endblock %}
+{% block title %} Products {% endblock %}
+{% block content %}
+<div class="container-fluid mt-2">
+    
+    <h5 style="margin-top:1%;">All Products</h5>
+    <div class="filters">
+        <div class="row">
+            <div class="col">
+                <div class="row text-center">
+                    {% for category in categories %}
+                        <div class="col mx-2 my-2">
+                            <a href="?category={{category.id}}"><button style="text-transform: capitalize;" class="btn border">{{category.name}}</button></a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+       <div id="sorting" class="col-2 mt-3">
+            <ul class="list-group">
+                <li style="text-transform: capitalize;"  class="list-group-item active">Sort By Categories</li>
+                <a style="text-decoration: none; color:black;" href="/products"><li class="list-group-item">All</li></a>
+                {% for category in categories %}
+                    <a style="color: black; text-decoration:none;" href="?category={{category.id}}"><li class="list-group-item">{{category.name}}</li></a>
+                {% endfor %}
+            </ul>    
+       </div>
+       <div class="col">
+        <div class="row productbody text-center">
+            {% for product in products %}
+                <div style="background-color: white;" class="col-lg-4 col-md-6 col-sm-6 col-12 my-3 border">
+                    <img style="width: 90%; height:200px; opacity:0.9;" src="{{product.image1.url}}" alt="product">
+                    <p>{{product.name}}</p>
+                    <p>Price : <del>{{product.price}}₹ </del>  {{product | wholeprice }} ₹  for {{product.pricefor}}</p>
+                    <!-- <p>By {{product.businessname}}</p> -->
+                    <p><a href="see/{{product.id}}"><button class="btn" style="background-color: rgb(156, 200, 176); color:white;" type="submit">See More</button></a></p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div id="sorting" class="col-2 mt-3">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                   <div class="col">
+                       <ul class="list-group">
+                            <li class="list-group-item active">Advance Sorting</li>
+                           {% for childcategory in childcategories %}
+                                <a style="color: black; text-decoration:none;" href="?childcategory={{childcategory.id}}"><li class="list-group-item">{{childcategory.name}}</li></a>
+                           {% endfor %}
+                       </ul>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    </div>
+</div>
+{% endblock %}

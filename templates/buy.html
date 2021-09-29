@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block title %} Buy Now {% endblock %}
+{% block script %}
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    window.onload = function(){
+        var options = {
+            "key": "rzp_test_FVgxuzBdJ9c4So",
+            "amount" : "{{ product|wholeprice }}",
+            "currency": "INR",
+            "name" : "{{product.name}}",
+            "description": "{{product.description}}",
+            "image": "{{product.image1.url}}",
+            "order_id": "{{order.id}}",
+            "callback_url": "http://localhost:8000/payment/verify",
+            "theme": {
+                "color": "#3399cc"
+            },
+            "prefill": {
+                "name": "{{request.user}}",
+                "email": "{{request.user.email}}"
+            },
+        }
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    }
+    
+</script>    
+
+    <p style="display: none;">{{product}}</p>
+    <p style="display: none;">{{order}}</p>
+    
+
+
+{% endblock %}
+{% block content %}
+
+{% endblock %}

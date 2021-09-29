@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block style %}
+{% load custom_filters %}
+<style>
+    @media screen and (max-width: 480px) {}
+</style>
+{% endblock %}
+{% block sell %}
+{% if request.session.reg %}
+<div class="col">
+    <div id="google_translate_element"></div>
+</div>
+<div class="col mt-1">
+    <p style="font-size:large; float:right; margin-right:2px; ">Hello,<span style="color:green;">{{firmname}}</span></p>
+</div>
+{% elif user.is_authenticated %}
+<div class="col">
+    <div id="google_translate_element"></div>
+</div>
+<div class="col mt-1">
+    <a href="#">
+        <p style="font-size: large; float:right;">Hello,<span
+                style="color:cornflowerblue; margin-right:3px;">{{request.user}}</span></p>
+    </a>
+</div>
+{% else %}
+<div class="col">
+    <div id="google_translate_element"></div>
+</div>
+<div class="col">
+    <a href="/business"><button style="float:right;" class="btn btn-info" type="submit">Want to sell</button></a>
+</div>
+{% endif %}
+{% endblock %}
+{% block content %}
+
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+
+    <div class="container-fluid">
+        <div style="margin-top:1%;" class="carousel-inner">
+
+            <div class="carousel-item active">
+                {% for carousel in carousels %}
+                <img class="d-block w-100 car" src="{{carousel.image1.url}}" alt="First slide">
+                {% endfor %}
+            </div>
+            <div class="carousel-item">
+                {% for carousel in carousels %}
+                <img class="d-block w-100 car" src="{{carousel.image2.url}}" alt="Second slide">
+                {% endfor %}
+            </div>
+            <div class="carousel-item">
+                {% for carousel in carousels %}
+                <img class="d-block w-100 car" src="{{carousel.image3.url}}" alt="Third slide">
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+</div>
+<div class="container-fluid">
+    <div style="display: flex; align-items:center;" class="row">
+        <div class="col">
+            <h4 style="font-size: large; margin-top:3%; margin-left:2%;">Brands</h4>
+        </div>
+        <div class="col">
+            <a href="/brands"><button style="float: right; margin-top:1%;" type="button"
+                    class="btn btn-outline-primary">View All</button></a>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <div class="col">
+            <div class="row text-center">
+                {% for brand in brands %}
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6 my-3">
+                    <img style="width: 150px; height:70px;" src="{{brand.image.url}}" alt="brand">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h4 style="font-size: large; margin-top:4%; margin-left:1%;">All Products</h4>
+        </div>
+        <div class="col">
+            <a href="/products"><button style="float: right; margin-top:4%;" type="button"
+                    class="btn btn-outline-primary">View All</button></a>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <div class="row">
+                {% for product in products %}
+                <div style="background-color: white;" class="col-lg-3 col-md-4 col-sm-6 col-12 border  my-2">
+                    <img style="width: 250px; opacity:0.9; height:200px; display:block; margin-left:auto; margin-right:auto;"
+                        src="{{product.image1.url}}" alt="product">
+                    <p style="text-align: center;">{{product.name}}</p>
+                    <p style="text-align: center;">Price : <del>{{product.price}}₹</del> {{ product|wholeprice }} ₹ for
+                        {{product.pricefor}}</p>
+                    <!-- <p style="text-align: center;">By {{product.businessname}}</p> -->
+                    <p style="text-align: center;"><a class="btni" href="see/{{product.id}}"><button class="btn"
+                                style="background-color:rgb(156, 200, 176); color:white;" type="submit">See
+                                More</button></a></p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
